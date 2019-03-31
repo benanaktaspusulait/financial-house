@@ -26,7 +26,7 @@ public class AppErrorController implements ErrorController {
             modelAndView.setViewName("error-500");
         }
         else {
-            modelAndView.setViewName("error-500");
+            modelAndView.setViewName("error");
         }
 
         return modelAndView;
