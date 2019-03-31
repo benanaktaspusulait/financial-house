@@ -32,7 +32,23 @@ public class Transaction extends AuditBase {
     @Column(name = "ORIGINAL_CURRENCY")
     private Currency originalCurrency;
 
-
+    @Column(name = "NAME")
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CUSTOMER_ID", foreignKey =
+    @ForeignKey(name = "FK_TRANSACTION_CUSTOMER"), insertable = false, updatable = false)
+    private Customer customer;
+
+    @Column(name = "CUSTOMER_ID")
+    private Long customerId;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "MERCHANT_ID", foreignKey =
+    @ForeignKey(name = "FK_TRANSACTION_MERCHANT"), insertable = false, updatable = false)
+    private Merchant merchant;
+
+    @Column(name = "MERCHANT_ID")
+    private Long merchantId;
 }
