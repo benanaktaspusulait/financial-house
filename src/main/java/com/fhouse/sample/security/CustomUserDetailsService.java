@@ -1,8 +1,8 @@
 package com.fhouse.sample.security;
 
 import com.fhouse.sample.exception.ResourceNotFoundException;
-import com.fhouse.sample.model.User;
-import com.fhouse.sample.repository.UserRepository;
+import com.fhouse.sample.model.security.User;
+import com.fhouse.sample.repository.security.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,6 +1,6 @@
 package com.fhouse.sample.security;
 
-import com.fhouse.sample.model.User;
+import com.fhouse.sample.model.security.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Data

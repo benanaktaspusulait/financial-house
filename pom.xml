@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.financialhouse</groupId>
-	<artifactId>sample</artifactId>
+	<artifactId>financial-house</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>polls</name>
+	<name>financial-house</name>
 	<description>Financial House Sample Project</description>
 
 	<parent>

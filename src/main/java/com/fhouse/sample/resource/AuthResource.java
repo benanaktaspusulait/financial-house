@@ -1,15 +1,15 @@
 package com.fhouse.sample.resource;
 
 import com.fhouse.sample.exception.AppException;
-import com.fhouse.sample.model.Role;
+import com.fhouse.sample.model.security.Role;
 import com.fhouse.sample.model.enums.RoleName;
-import com.fhouse.sample.model.User;
+import com.fhouse.sample.model.security.User;
 import com.fhouse.sample.payload.response.ApiResponse;
 import com.fhouse.sample.payload.response.JwtAuthenticationResponse;
 import com.fhouse.sample.payload.request.LoginRequest;
 import com.fhouse.sample.payload.request.SignUpRequest;
-import com.fhouse.sample.repository.RoleRepository;
-import com.fhouse.sample.repository.UserRepository;
+import com.fhouse.sample.repository.security.RoleRepository;
+import com.fhouse.sample.repository.security.UserRepository;
 import com.fhouse.sample.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

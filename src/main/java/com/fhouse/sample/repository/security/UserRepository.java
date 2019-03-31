@@ -1,6 +1,6 @@
-package com.fhouse.sample.repository;
+package com.fhouse.sample.repository.security;
 
-import com.fhouse.sample.model.User;
+import com.fhouse.sample.model.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

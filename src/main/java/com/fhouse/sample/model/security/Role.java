@@ -1,4 +1,4 @@
-package com.fhouse.sample.model;
+package com.fhouse.sample.model.security;
 
 import com.fhouse.sample.model.enums.RoleName;
 import lombok.Data;
