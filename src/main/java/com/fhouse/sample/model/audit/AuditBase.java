@@ -27,14 +27,20 @@ public abstract class AuditBase extends ModelBase {
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
     @CreatedDate
-    @Column(name = "CREATE_DATE")
-    public Instant createdDate;
+    @Column(name = "CREATED_AT")
+    public Instant createdAt;
 
     @Basic(fetch = FetchType.LAZY)
     @JsonIgnore
     @LastModifiedDate
-    @Column(name = "UPDATE_DATE")
-    private Instant lastModifiedDate;
+    @Column(name = "UPDATED_AT")
+    private Instant updatedAt;
+
+    @Basic(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @LastModifiedDate
+    @Column(name = "DELETED_AT")
+    private Instant deletedAt;
 
     @Basic(fetch = FetchType.LAZY)
     @NotNull

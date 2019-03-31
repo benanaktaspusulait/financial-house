@@ -24,13 +24,7 @@ public class LoggingAspect {
     /**
      * Pointcut that matches all Spring beans in the application's main packages.
      */
-    @Pointcut("within(com.n11.pims.common..*)" + " || " +
-            "within(com.n11.pims.controller..*)" + " || " +
-            "within(com.n11.pims.dto..*)" + " || " +
-            "within(com.n11.pims.elastic..*)" + " || " +
-            "within(com.n11.pims.repositories..*)" + " || " +
-            "within(com.n11.pims.service..*)" + " || " +
-            "within(com.n11.pims.utils..*)")
+    @Pointcut("within(com.fhouse.sample..*)")
     public void applicationPackagePointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the
         // advices.
