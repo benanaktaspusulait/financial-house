@@ -37,8 +37,8 @@ public class SwaggerConfig {
 
     private ApiInfo getApiInfo() {
         return new ApiInfo(
-                "Staroke.com API DOCS",
-                "Staroke.com API DOCS FOR TESTS",
+                "FHouse API DOCS",
+                "FHouse API DOCS FOR TESTS",
                 "v1.0",
                 "Apache 2.0",
                 new Contact("Benan Aktaş", "http://pusulait.com", "benan.aktas@pusulait.com"),
