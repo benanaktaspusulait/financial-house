@@ -2,6 +2,7 @@ package com.fhouse.sample.model;
 
 import com.fhouse.sample.model.audit.AuditBase;
 import com.fhouse.sample.model.enums.Currency;
+import com.fhouse.sample.util.AppConstants;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -51,4 +52,11 @@ public class Transaction extends AuditBase {
 
     @Column(name = "MERCHANT_ID")
     private Long merchantId;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="updatedAt",column=@Column(name=  "RESULT_updatedAt")),
+            @AttributeOverride(name="createdAt",column=@Column(name= "RESULT_createdAt"))
+    })
+    private TransactionResult transactionResult;
 }
