@@ -21,7 +21,7 @@ import java.util.Collections;
 @Configuration
 @EnableSwagger2
 @Profile({"test","dev"})
-public class SwaggerConfig {
+public class SwaggerConfiguration {
 
     @Bean
     public Docket apiDocket() {

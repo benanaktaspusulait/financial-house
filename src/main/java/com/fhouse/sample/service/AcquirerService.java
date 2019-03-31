@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -43,6 +42,10 @@ public class AcquirerService {
 
     public Page<AcquirerDTO> findAll(Pageable pageable) {
         return acquirerRepository.findAll(pageable).map(acquire -> modelMapper.map( acquire, AcquirerDTO.class));
+    }
+
+    public List<AcquirerDTO> findAll() {
+        return acquirerRepository.findAll().stream().map(acquire -> modelMapper.map( acquire, AcquirerDTO.class)).collect(Collectors.toList());
     }
 
     @Transactional

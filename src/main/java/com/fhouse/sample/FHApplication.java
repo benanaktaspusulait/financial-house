@@ -25,7 +25,7 @@ import java.util.TimeZone;
 		FHApplication.class,
 		Jsr310JpaConverters.class
 })
-@ComponentScan({"com.fhouse"})
+@ComponentScan({"com.fhouse.sample"})
 public class FHApplication  extends SpringBootServletInitializer {
 
 	@PostConstruct

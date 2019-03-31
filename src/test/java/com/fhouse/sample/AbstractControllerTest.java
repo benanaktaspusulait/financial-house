@@ -2,15 +2,22 @@ package com.fhouse.sample;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fhouse.sample.config.WebMvcConfiguration;
+import com.fhouse.sample.resource.AcquirerResource;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -22,33 +29,31 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 /**
  * Helps the controller testings
  */
-@WebAppConfiguration
-@ContextConfiguration
-public class AbstractControllerTest{
+@Configuration
+@ComponentScan(basePackages = {"com.fhouse.sample"})
+@EnableAspectJAutoProxy
+public class AbstractControllerTest {
 
-    protected MockMvc mvc;
-    
+    protected MockMvc mockMvc;
 
-    @Autowired
-    protected WebApplicationContext webApplicationContext;
-
-    protected void setUp(){
-        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).apply(springSecurity()).build();
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.standaloneSetup(new AcquirerResource()).build();
     }
-    
+
     @Test
     public void test() {
-    	
+
     }
-    
+
     protected HttpHeaders getHeadersForJson() throws Exception {
-		String token = getAuthorizationToken();
+        String token = getAuthorizationToken();
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Accept", "application/json");
         httpHeaders.add("Content-Type", "application/json");
-        httpHeaders.add("Authorization", "Bearer "+token);
-        
+        httpHeaders.add("Authorization", "Bearer " + token);
+
         return httpHeaders;
     }
 
@@ -62,27 +67,31 @@ public class AbstractControllerTest{
         return objectMapper.readValue(json, clazz);
     }
 
-    protected void setUp(BaseController controller){
-        mvc = MockMvcBuilders.standaloneSetup(controller).build();
+    protected void setUp(BaseController controller) {
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
-    
+
+
     protected String getAuthorizationToken() throws Exception {
-    		String pass = "Q4star7oke";
-    		String cs = "123456";
-    		String url = "/oauth/token?password="+pass+"&username=selimoruc&grant_type=password&scope(0)=read&scope(1)=write&client_secret="+cs+"&client_id=clientapp";
-    	
-    		HttpHeaders httpHeaders = new HttpHeaders();
-    		httpHeaders.add("Authorization", "Basic Y2xpZW50YXBwOjEyMzQ1Ng==");
-    		
-    		httpHeaders.add("Accept", "application/json");
-    		
-    		MvcResult mvcResult = mvc.perform(
-    		          MockMvcRequestBuilders.post(url).headers(httpHeaders).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON).content("")
-    		        ).andReturn();
-    		
-    		JacksonJsonParser jsonParser = new JacksonJsonParser();
-        return jsonParser.parseMap(mvcResult.getResponse().getContentAsString()).get("access_token").toString();
+
+        String exampleUserJson = "{\"email\":\"merchant@test.com\",\"password\":\"12345\"}";
+
+
+        // Send course as body to /students/Student1/courses
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post("/api/v3/merchant/user/login")
+                .accept(MediaType.APPLICATION_JSON).content(exampleUserJson)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        String tokenWithBearer = result.getResponse().getHeader( "Authorization");
+
+        if(tokenWithBearer != null) {
+            return tokenWithBearer.split(" ")[1];
+        }else
+            return null;
+
+
     }
-    
 
 }

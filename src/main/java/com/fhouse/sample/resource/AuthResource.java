@@ -31,7 +31,7 @@ import java.util.Collections;
 
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v3/merchant/user")
 public class AuthResource {
 
     @Autowired
@@ -49,12 +49,12 @@ public class AuthResource {
     @Autowired
     JwtTokenProvider tokenProvider;
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsernameOrEmail(),
+                        loginRequest.getEmail(),
                         loginRequest.getPassword()
                 )
         );
