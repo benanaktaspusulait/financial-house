@@ -1,4 +1,4 @@
-package com.fhouse.sample.payload;
+package com.fhouse.sample.payload.request;
 
 import lombok.Data;
 

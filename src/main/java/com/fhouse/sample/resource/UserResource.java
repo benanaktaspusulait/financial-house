@@ -1,7 +1,7 @@
 package com.fhouse.sample.resource;
 
-import com.fhouse.sample.payload.UserIdentityAvailability;
-import com.fhouse.sample.payload.UserSummary;
+import com.fhouse.sample.payload.response.UserIdentityAvailability;
+import com.fhouse.sample.payload.response.UserSummary;
 import com.fhouse.sample.repository.UserRepository;
 import com.fhouse.sample.security.CurrentUser;
 import com.fhouse.sample.security.UserPrincipal;
