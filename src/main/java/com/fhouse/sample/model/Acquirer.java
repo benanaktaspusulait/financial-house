@@ -10,8 +10,8 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "CUSTOMER")
-@SQLDelete(sql = "update CUSTOMER SET DATA_STATUS = 'DELETED' WHERE id = ? AND version = ?")
+@Table(name = "ACQUIRER")
+@SQLDelete(sql = "update ACQUIRER SET DATA_STATUS = 'DELETED' WHERE id = ? AND version = ?")
 @Where(clause = "DATA_STATUS <> 'DELETED'")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,8 +20,8 @@ import javax.persistence.*;
 public class Acquirer extends AuditBase {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CUSTOMER_ID")
-    @SequenceGenerator(name = "SEQ_CUSTOMER_ID", sequenceName = "SEQ_CUSTOMER_ID", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ACQUIRER_ID")
+    @SequenceGenerator(name = "SEQ_ACQUIRER_ID", sequenceName = "SEQ_ACQUIRER_ID", allocationSize = 1, initialValue = 1)
     @Column(name = "ID", nullable = false)
     private Long id;
 

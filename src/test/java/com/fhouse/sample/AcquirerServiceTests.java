@@ -1,8 +1,15 @@
 package com.fhouse.sample;
 
+import com.fhouse.sample.model.Acquirer;
+import com.fhouse.sample.model.dto.AcquirerDTO;
+import com.fhouse.sample.model.enums.AcquirerType;
+import com.fhouse.sample.repository.transaction.AcquirerRepository;
+import com.fhouse.sample.service.AcquirerService;
 import com.github.javafaker.Faker;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -16,7 +23,18 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PollsApplicationTests {
+public class AcquirerServiceTests {
+
+	@Autowired
+	AcquirerService acquirerService;
+
+	@Test
+	public void insertAcquirer() {
+
+		Faker ukFaker = new Faker(new Locale("en-GB"));
+		AcquirerDTO dto = new AcquirerDTO(ukFaker.code().asin(), ukFaker.name().fullName(), AcquirerType.CREDIT_CARD);
+		acquirerService.save(dto);
+	}
 
 	@Test
 	public void contextLoads() {
