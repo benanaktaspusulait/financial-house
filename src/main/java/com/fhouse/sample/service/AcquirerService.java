@@ -3,6 +3,7 @@ package com.fhouse.sample.service;
 import com.fhouse.sample.model.Acquirer;
 import com.fhouse.sample.model.dto.AcquirerDTO;
 import com.fhouse.sample.repository.transaction.AcquirerRepository;
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -40,7 +42,25 @@ public class AcquirerService {
 
 
     public Page<AcquirerDTO> findAll(Pageable pageable) {
-        return acquirerRepository.findAll(pageable).map(a -> modelMapper.map( a, AcquirerDTO.class));
+        return acquirerRepository.findAll(pageable).map(acquire -> modelMapper.map( acquire, AcquirerDTO.class));
     }
 
+    @Transactional
+    public void delete(Long id) {
+        log.debug ( "Request to delete Acquirer : {}" , id );
+        acquirerRepository.deleteById ( id );
+    }
+
+    public AcquirerDTO findOne(Long id) throws NotFoundException {
+
+        log.debug ( "Request to get Acquirer : {}" , id );
+        Acquirer acquirer = acquirerRepository.getOne ( id );
+
+        if (acquirer == null) {
+            throw new NotFoundException ( "acquirer not found with id :" + id );
+        } else {
+            AcquirerDTO dto = modelMapper.map( acquirer, AcquirerDTO.class);
+            return dto;
+        }
+    }
 }
